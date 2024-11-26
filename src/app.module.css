@@ -1,0 +1,30 @@
+
+
+.mainContainer {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.divButtons {
+    width: 100%;
+    gap: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    height: 7%;
+    background-color: rgba(0, 0, 0, 0.766);
+
+    /* width: 100%; */
+}
+
+.button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: #1f36e6;   
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
