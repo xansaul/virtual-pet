@@ -1,15 +1,14 @@
-import { useState } from 'react';
-import styles from './app.module.css';
-
+import { useState } from "react";
+import styles from "./app.module.css";
 
 const states = {
   Feliz: "Feliz",
   Triste: "Triste",
-  Enojado:"Enojado",
+  Enojado: "Enojado",
   Somnoliento: "Somnoliento",
   Dormido: "Dormido",
   Inquieto: "Inquieto",
-  Enfermo: "Enfermo"
+  Enfermo: "Enfermo",
 };
 
 const actionsObj = {
@@ -104,9 +103,7 @@ const transitions = {
   },
 };
 
-
 function App() {
-
   const [state, setState] = useState<string>(states.Feliz);
 
   const handleAction = (action: string) => {
@@ -118,7 +115,10 @@ function App() {
 
   return (
     <div className={styles.mainContainer}>
-      <h1>{state}</h1>
+      <img
+        src={`pet/${state}.png`}
+        className={styles.img}
+      />
       <div className={styles.divButtons}>
         {Object.entries(actionsObj).map(([key, action]) => (
           <button
@@ -134,4 +134,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

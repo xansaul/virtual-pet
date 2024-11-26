@@ -28,3 +28,12 @@
     border: none;
     cursor: pointer;
 }
+
+.img {
+    position: absolute; /* Esto es necesario para que el centrado funcione */
+    width: 900px;
+    height: 500px;
+    top: 50%;           
+    left: 50%;         
+    transform: translate(-50%, -50%);
+}
