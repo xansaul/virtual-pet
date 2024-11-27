@@ -14,102 +14,116 @@ const states = {
 const actionsObj = {
   Acariciar: "Acariciar",
   Pasear: "Pasear",
-  Alimentar: "Alimentar",
-  LlevarVeterinario: "Llevar al veterinario",
   Jugar: "Jugar",
-  Pegar: "Pegar",
-  Ignorar: "Ignorar",
   Abrazar: "Abrazar",
   Dormir: "Dormir",
+  Alimentar: "Alimentar",
+  LlevarVeterinario: "Llevar al veterinario",
+  Ignorar: "Ignorar",
+  Pegar: "Pegar",
+};
+
+const outs = {
+  MueveCola: "Mueve la cola",
+  SeEmociona: "Se emociona",
+  Come: "Come",
+  MiraFeo: "Te mira feo",
+  Chilla: "Chilla",
+  Duerme: "Duerme",
+  TeIgnora: "Te ignora",
+  Ladra: "Ladra",
 };
 
 const transitions = {
   [states.Feliz]: {
-    [actionsObj.Acariciar]: states.Feliz,
-    [actionsObj.Pasear]: states.Somnoliento,
-    [actionsObj.Jugar]: states.Somnoliento,
-    [actionsObj.Abrazar]: states.Feliz,
-    [actionsObj.Dormir]: states.Dormido,
-    [actionsObj.Alimentar]: states.Somnoliento,
-    [actionsObj.LlevarVeterinario]: states.Enojado,
-    [actionsObj.Ignorar]: states.Triste,
-    [actionsObj.Pegar]: states.Triste,
-  },
-  [states.Triste]: {
-    [actionsObj.Acariciar]: states.Feliz,
-    [actionsObj.Pasear]: states.Feliz,
-    [actionsObj.Jugar]: states.Feliz,
-    [actionsObj.Abrazar]: states.Feliz,
-    [actionsObj.Dormir]: states.Triste,
-    [actionsObj.Alimentar]: states.Triste,
-    [actionsObj.LlevarVeterinario]: states.Inquieto,
-    [actionsObj.Ignorar]: states.Triste,
-    [actionsObj.Pegar]: states.Enfermo,
+    [actionsObj.Acariciar]: { state: states.Feliz, out: outs.MueveCola },
+    [actionsObj.Pasear]: { state: states.Somnoliento, out: outs.SeEmociona },
+    [actionsObj.Jugar]: { state: states.Somnoliento, out: outs.SeEmociona },
+    [actionsObj.Abrazar]: { state: states.Feliz, out: outs.MueveCola },
+    [actionsObj.Dormir]: { state: states.Dormido, out: outs.Duerme },
+    [actionsObj.Alimentar]: { state: states.Somnoliento, out: outs.Come },
+    [actionsObj.LlevarVeterinario]: { state: states.Enojado, out: outs.MiraFeo },
+    [actionsObj.Ignorar]: { state: states.Triste, out: outs.Ladra },
+    [actionsObj.Pegar]: { state: states.Triste, out: outs.Chilla },
   },
   [states.Enojado]: {
-    [actionsObj.Acariciar]: states.Inquieto,
-    [actionsObj.Pasear]: states.Inquieto,
-    [actionsObj.Jugar]: states.Inquieto,
-    [actionsObj.Abrazar]: states.Inquieto,
-    [actionsObj.Dormir]: states.Enojado,
-    [actionsObj.Alimentar]: states.Enfermo,
-    [actionsObj.LlevarVeterinario]: states.Enojado,
-    [actionsObj.Ignorar]: states.Enojado,
-    [actionsObj.Pegar]: states.Enfermo,
+    [actionsObj.Acariciar]: { state: states.Inquieto, out: outs.MiraFeo },
+    [actionsObj.Pasear]: { state: states.Inquieto, out: outs.TeIgnora },
+    [actionsObj.Jugar]: { state: states.Inquieto, out: outs.TeIgnora },
+    [actionsObj.Abrazar]: { state: states.Inquieto, out: outs.MueveCola },
+    [actionsObj.Dormir]: { state: states.Enojado, out: outs.TeIgnora },
+    [actionsObj.Alimentar]: { state: states.Enfermo, out: outs.Come },
+    [actionsObj.LlevarVeterinario]: { state: states.Enojado, out: outs.MiraFeo },
+    [actionsObj.Ignorar]: { state: states.Enojado, out: outs.MiraFeo },
+    [actionsObj.Pegar]: { state: states.Enfermo, out: outs.Ladra },
+  },
+  [states.Triste]: {
+    [actionsObj.Acariciar]: { state: states.Feliz, out: outs.MueveCola },
+    [actionsObj.Pasear]: { state: states.Feliz, out: outs.SeEmociona },
+    [actionsObj.Jugar]: { state: states.Feliz, out: outs.SeEmociona },
+    [actionsObj.Abrazar]: { state: states.Feliz, out: outs.MueveCola },
+    [actionsObj.Dormir]: { state: states.Triste, out: outs.Chilla },
+    [actionsObj.Alimentar]: { state: states.Triste, out: outs.Come },
+    [actionsObj.LlevarVeterinario]: { state: states.Inquieto, out: outs.Chilla },
+    [actionsObj.Ignorar]: { state: states.Triste, out: outs.Chilla },
+    [actionsObj.Pegar]: { state: states.Enfermo, out: outs.Chilla },
   },
   [states.Somnoliento]: {
-    [actionsObj.Acariciar]: states.Somnoliento,
-    [actionsObj.Pasear]: states.Somnoliento,
-    [actionsObj.Jugar]: states.Somnoliento,
-    [actionsObj.Abrazar]: states.Dormido,
-    [actionsObj.Dormir]: states.Dormido,
-    [actionsObj.Alimentar]: states.Somnoliento,
-    [actionsObj.LlevarVeterinario]: states.Enojado,
-    [actionsObj.Ignorar]: states.Somnoliento,
-    [actionsObj.Pegar]: states.Enojado,
+    [actionsObj.Acariciar]: { state: states.Somnoliento, out: outs.MueveCola },
+    [actionsObj.Pasear]: { state: states.Somnoliento, out: outs.MueveCola },
+    [actionsObj.Jugar]: { state: states.Somnoliento, out: outs.MueveCola },
+    [actionsObj.Abrazar]: { state: states.Dormido, out: outs.Duerme },
+    [actionsObj.Dormir]: { state: states.Dormido, out: outs.Duerme },
+    [actionsObj.Alimentar]: { state: states.Somnoliento, out: outs.TeIgnora },
+    [actionsObj.LlevarVeterinario]: { state: states.Enojado, out: outs.MiraFeo },
+    [actionsObj.Ignorar]: { state: states.Somnoliento, out: outs.MiraFeo },
+    [actionsObj.Pegar]: { state: states.Enojado, out: outs.Chilla },
   },
   [states.Dormido]: {
-    [actionsObj.Acariciar]: states.Dormido,
-    [actionsObj.Pasear]: states.Dormido,
-    [actionsObj.Jugar]: states.Dormido,
-    [actionsObj.Abrazar]: states.Dormido,
-    [actionsObj.Dormir]: states.Dormido,
-    [actionsObj.Alimentar]: states.Inquieto,
-    [actionsObj.LlevarVeterinario]: states.Triste,
-    [actionsObj.Ignorar]: states.Feliz,
-    [actionsObj.Pegar]: states.Enojado,
+    [actionsObj.Acariciar]: { state: states.Dormido, out: outs.MueveCola },
+    [actionsObj.Pasear]: { state: states.Dormido, out: outs.Duerme },
+    [actionsObj.Jugar]: { state: states.Dormido, out: outs.Duerme },
+    [actionsObj.Abrazar]: { state: states.Dormido, out: outs.MueveCola },
+    [actionsObj.Dormir]: { state: states.Dormido, out: outs.Duerme },
+    [actionsObj.Alimentar]: { state: states.Inquieto, out: outs.Come },
+    [actionsObj.LlevarVeterinario]: { state: states.Triste, out: outs.Chilla },
+    [actionsObj.Ignorar]: { state: states.Feliz, out: outs.Duerme },
+    [actionsObj.Pegar]: { state: states.Enojado, out: outs.Chilla },
   },
   [states.Inquieto]: {
-    [actionsObj.Acariciar]: states.Feliz,
-    [actionsObj.Pasear]: states.Feliz,
-    [actionsObj.Jugar]: states.Feliz,
-    [actionsObj.Abrazar]: states.Feliz,
-    [actionsObj.Dormir]: states.Inquieto,
-    [actionsObj.Alimentar]: states.Feliz,
-    [actionsObj.LlevarVeterinario]: states.Enojado,
-    [actionsObj.Ignorar]: states.Triste,
-    [actionsObj.Pegar]: states.Enojado,
+    [actionsObj.Acariciar]: { state: states.Feliz, out: outs.MueveCola },
+    [actionsObj.Pasear]: { state: states.Feliz, out: outs.SeEmociona },
+    [actionsObj.Jugar]: { state: states.Feliz, out: outs.SeEmociona },
+    [actionsObj.Abrazar]: { state: states.Feliz, out: outs.MueveCola },
+    [actionsObj.Dormir]: { state: states.Inquieto, out: outs.Ladra },
+    [actionsObj.Alimentar]: { state: states.Feliz, out: outs.Come },
+    [actionsObj.LlevarVeterinario]: { state: states.Enojado, out: outs.Ladra },
+    [actionsObj.Ignorar]: { state: states.Triste, out: outs.Ladra },
+    [actionsObj.Pegar]: { state: states.Enojado, out: outs.Ladra },
   },
   [states.Enfermo]: {
-    [actionsObj.Acariciar]: states.Enfermo,
-    [actionsObj.Pasear]: states.Enfermo,
-    [actionsObj.Jugar]: states.Enfermo,
-    [actionsObj.Abrazar]: states.Enfermo,
-    [actionsObj.Dormir]: states.Enfermo,
-    [actionsObj.Alimentar]: states.Enfermo,
-    [actionsObj.LlevarVeterinario]: states.Inquieto,
-    [actionsObj.Ignorar]: states.Enfermo,
-    [actionsObj.Pegar]: states.Enfermo,
+    [actionsObj.Acariciar]: { state: states.Enfermo, out: outs.TeIgnora },
+    [actionsObj.Pasear]: { state: states.Enfermo, out: outs.TeIgnora },
+    [actionsObj.Jugar]: { state: states.Enfermo, out: outs.MueveCola },
+    [actionsObj.Abrazar]: { state: states.Enfermo, out: outs.TeIgnora },
+    [actionsObj.Dormir]: { state: states.Enfermo, out: outs.TeIgnora },
+    [actionsObj.Alimentar]: { state: states.Enfermo, out: outs.TeIgnora },
+    [actionsObj.LlevarVeterinario]: { state: states.Inquieto, out: outs.Chilla },
+    [actionsObj.Ignorar]: { state: states.Enfermo, out: outs.Chilla },
+    [actionsObj.Pegar]: { state: states.Enfermo, out: outs.MiraFeo },
   },
+
 };
 
 function App() {
   const [state, setState] = useState<string>(states.Feliz);
+  const [out, setOut] = useState<string>("");
 
   const handleAction = (action: string) => {
-    const newState = transitions[state]?.[action];
-    if (newState) {
-      setState(newState);
+    const transition = transitions[state]?.[action];
+    if (transition) {
+      setOut(transition.out || "");
+      setTimeout(() => { setState(transition.state); }, 1000);
     }
   };
 
@@ -118,7 +132,11 @@ function App() {
       <img
         src={`pet/${state}.png`}
         className={styles.img}
+        alt={`Estado actual: ${state}`}
       />
+      <div className={styles.divOut}>
+        {out && <p>Pug: {out}</p>}
+      </div>
       <div className={styles.divButtons}>
         {Object.entries(actionsObj).map(([key, action]) => (
           <button
